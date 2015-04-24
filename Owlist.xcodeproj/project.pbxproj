@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		958445391AEA37C300F77186 /* OwlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958445381AEA37C200F77186 /* OwlistItem.swift */; };
 		95ED971F1AE8E77000C0D321 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED971E1AE8E77000C0D321 /* AppDelegate.swift */; };
-		95ED97211AE8E77000C0D321 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED97201AE8E77000C0D321 /* ViewController.swift */; };
+		95ED97211AE8E77000C0D321 /* OwlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED97201AE8E77000C0D321 /* OwlistViewController.swift */; };
 		95ED97241AE8E77000C0D321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ED97221AE8E77000C0D321 /* Main.storyboard */; };
 		95ED97261AE8E77000C0D321 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95ED97251AE8E77000C0D321 /* Images.xcassets */; };
 		95ED97291AE8E77000C0D321 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95ED97271AE8E77000C0D321 /* LaunchScreen.xib */; };
@@ -26,10 +27,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		958445381AEA37C200F77186 /* OwlistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwlistItem.swift; sourceTree = "<group>"; };
 		95ED97191AE8E77000C0D321 /* Owlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Owlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95ED971D1AE8E77000C0D321 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95ED971E1AE8E77000C0D321 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		95ED97201AE8E77000C0D321 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		95ED97201AE8E77000C0D321 /* OwlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwlistViewController.swift; sourceTree = "<group>"; };
 		95ED97231AE8E77000C0D321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95ED97251AE8E77000C0D321 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		95ED97281AE8E77000C0D321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -78,7 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				95ED971E1AE8E77000C0D321 /* AppDelegate.swift */,
-				95ED97201AE8E77000C0D321 /* ViewController.swift */,
+				95ED97201AE8E77000C0D321 /* OwlistViewController.swift */,
+				958445381AEA37C200F77186 /* OwlistItem.swift */,
 				95ED97221AE8E77000C0D321 /* Main.storyboard */,
 				95ED97251AE8E77000C0D321 /* Images.xcassets */,
 				95ED97271AE8E77000C0D321 /* LaunchScreen.xib */,
@@ -212,7 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95ED97211AE8E77000C0D321 /* ViewController.swift in Sources */,
+				958445391AEA37C300F77186 /* OwlistItem.swift in Sources */,
+				95ED97211AE8E77000C0D321 /* OwlistViewController.swift in Sources */,
 				95ED971F1AE8E77000C0D321 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +413,7 @@
 				95ED973A1AE8E77000C0D321 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		95ED973B1AE8E77000C0D321 /* Build configuration list for PBXNativeTarget "OwlistTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +422,7 @@
 				95ED973D1AE8E77000C0D321 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
