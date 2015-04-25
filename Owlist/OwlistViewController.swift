@@ -8,7 +8,8 @@
 
 import UIKit
 
-class OwlistViewController: UITableViewController {
+class OwlistViewController: UITableViewController, ItemDetailViewControllerDelegate {
+        
     
     //MARK: Dummy Variables
     // This declares that items will hold an array of ChecklistItem objects 
@@ -19,41 +20,9 @@ class OwlistViewController: UITableViewController {
     
     //MARK: Initializer for Checklist Items
     required init(coder aDecoder: NSCoder) {
-        
-        // This instantiates the array. Now items contains a valid array object, // but the array has no ChecklistItem objects inside it yet.
         items = [OwlistItem]()
-        
-        let row0item = OwlistItem()
-        row0item.text = "Walk the dog"
-        row0item.checked = false
-        items.append(row0item)
-        
-        let row1item = OwlistItem()
-        row1item.text = "Brush my teeth"
-        row1item.checked = true
-        items.append(row1item)
-        
-       let  row2item = OwlistItem()
-        row2item.text = "Learn iOS development"
-        row2item.checked = true
-        items.append(row2item)
-
-        let row3item = OwlistItem()
-        row3item.text = "Soccer practice"
-        row3item.checked = false
-        items.append(row3item)
-
-        let row4item = OwlistItem()
-        row4item.text = "Eat ice cream"
-        row4item.checked = true
-        items.append(row4item)
-        
-        let row5item = OwlistItem()
-        row5item.text = "Bake a Cake"
-        row5item.checked = true
-        items.append(row5item)
-
         super.init(coder: aDecoder)
+        loadOwlistItems()
     }
     
     override func viewDidLoad() {
@@ -80,6 +49,17 @@ class OwlistViewController: UITableViewController {
             return cell
     }
     
+    //MARK: Delete Rows (Swipe to Delete)
+    override func tableView(tableView: UITableView,commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+                // remove the item from the data model,
+                items.removeAtIndex(indexPath.row)
+                // delete the corresponding row from the table view.
+                let indexPaths = [indexPath]
+                tableView.deleteRowsAtIndexPaths(indexPaths,withRowAnimation: .Automatic)
+                saveOwlistItems( )
+    }
+    
+    
         //MARK: Checkmark Toggling
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
@@ -88,13 +68,15 @@ class OwlistViewController: UITableViewController {
                 configureCheckmarkForCell(cell, withOwlistItem: item)
             }
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            saveOwlistItems( )
     }
     //MARK: Configure Checkmark
     func configureCheckmarkForCell(cell: UITableViewCell, withOwlistItem item: OwlistItem) {
+        let label = cell.viewWithTag(1001) as! UILabel
         if item.checked {
-            cell.accessoryType = .Checkmark
+            label.text = "✓"
         } else {
-            cell.accessoryType = .None
+            label.text = ""
         }
     }
     
@@ -103,7 +85,88 @@ class OwlistViewController: UITableViewController {
                         let label = cell.viewWithTag(1000) as! UILabel
                         label.text = item.text
                 }
-                
+    
+    //MARK: AddItem View Controller Delegate
+    func itemDetailViewControllerDidCancel(controller: ItemDetailViewController) {
+                dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: OwlistItem) {
+                    let newRowIndex = items.count
+                    items.append(item)
+                    let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
+                    let indexPaths = [indexPath]
+                    tableView.insertRowsAtIndexPaths(indexPaths,withRowAnimation: .Automatic)
+                    dismissViewControllerAnimated(true, completion: nil)
+                    saveOwlistItems( )
+    }
+    
+    //MARK: Editing Item View Controller Delegate
+    func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: OwlistItem)
+    {
+            if let index = find(items, item)
+            {
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                if let cell = tableView.cellForRowAtIndexPath(indexPath)
+                {
+                    configureTextForCell(cell, withOwlistItem: item)
+                }
+            }
+            dismissViewControllerAnimated(true, completion: nil)
+            saveOwlistItems( )
+    }
+    
+    //MARK: Prepare for Segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AddItem" {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! ItemDetailViewController
+            controller.delegate = self
+        } else if segue.identifier == "EditItem"
+        {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! ItemDetailViewController
+            controller.delegate = self
+            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+                        {
+                            controller.itemToEdit = items[indexPath.row]
+                        }
+        }
+    }
+    
+    //MARK: Documents DIrectory and Saving Files
+    func documentsDirectory() -> String {
+            let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
+            return paths[0]
+    }
+    
+    func dataFilePath() -> String {
+            return documentsDirectory().stringByAppendingPathComponent("Owlist.plist")
+    }
+    
+    func saveOwlistItems() {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+        archiver.encodeObject(items, forKey: "OwlistItems")
+        archiver.finishEncoding()
+        data.writeToFile(dataFilePath(), atomically: true)
+    }
+    
+    //MARK: Load Saved Owlist Items
+    func loadOwlistItems() {
+               
+        let path = dataFilePath()
+        if NSFileManager.defaultManager().fileExistsAtPath(path)
+            {
+                if let data = NSData(contentsOfFile: path)
+                    {
+                        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+                        items = unarchiver.decodeObjectForKey("OwlistItems") as! [OwlistItem]
+                        unarchiver.finishDecoding()
+                    }
+            }
+    }
+    
     //MARK: FInal Closure
 }
 
