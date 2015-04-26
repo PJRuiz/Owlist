@@ -207,16 +207,15 @@
                     <navigationItem key="navigationItem" title="Add Owlist" id="zlR-8A-jR2">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5z5-AU-MKA">
                             <connections>
-                                <action selector="cancel" destination="RQS-Gc-Jf0" id="8JT-ug-oYU"/>
+                                <action selector="cancel" destination="RQS-Gc-Jf0" id="ddE-ox-AXE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="u5m-Wf-qZF">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="done" id="u5m-Wf-qZF">
                             <connections>
-                                <action selector="done" destination="RQS-Gc-Jf0" id="kM5-r1-eoQ"/>
+                                <action selector="done" destination="RQS-Gc-Jf0" id="YI1-OP-YSX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="doneBarButton" destination="u5m-Wf-qZF" id="lLE-as-BPd"/>
                         <outlet property="textField" destination="BUy-1k-0vW" id="eme-iK-N2H"/>
@@ -276,7 +275,7 @@
                     <navigationItem key="navigationItem" title="Owlists" id="tT6-N9-7Vg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="exu-bd-fpD">
                             <connections>
-                                <segue destination="ozi-ou-2qU" kind="presentation" identifier="" id="A6w-Dp-Eho"/>
+                                <segue destination="ozi-ou-2qU" kind="presentation" identifier="AddOwlist" id="Y2l-8l-jEC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
