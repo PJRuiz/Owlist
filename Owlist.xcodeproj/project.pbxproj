@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		958445391AEA37C300F77186 /* OwlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958445381AEA37C200F77186 /* OwlistItem.swift */; };
 		9584453B1AEA622900F77186 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584453A1AEA622900F77186 /* ItemDetailViewController.swift */; };
+		9584453E1AEB452E00F77186 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584453D1AEB452E00F77186 /* AllListsViewController.swift */; };
+		958445401AEB49B500F77186 /* Owlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584453F1AEB49B500F77186 /* Owlist.swift */; };
+		95C0B3B81AEBCBD5000F0AD9 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C0B3B71AEBCBD5000F0AD9 /* ListDetailViewController.swift */; };
 		95ED971F1AE8E77000C0D321 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED971E1AE8E77000C0D321 /* AppDelegate.swift */; };
 		95ED97211AE8E77000C0D321 /* OwlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED97201AE8E77000C0D321 /* OwlistViewController.swift */; };
 		95ED97241AE8E77000C0D321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ED97221AE8E77000C0D321 /* Main.storyboard */; };
@@ -30,6 +33,9 @@
 /* Begin PBXFileReference section */
 		958445381AEA37C200F77186 /* OwlistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwlistItem.swift; sourceTree = "<group>"; };
 		9584453A1AEA622900F77186 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
+		9584453D1AEB452E00F77186 /* AllListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
+		9584453F1AEB49B500F77186 /* Owlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Owlist.swift; sourceTree = "<group>"; };
+		95C0B3B71AEBCBD5000F0AD9 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 		95ED97191AE8E77000C0D321 /* Owlist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Owlist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95ED971D1AE8E77000C0D321 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95ED971E1AE8E77000C0D321 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +71,8 @@
 			children = (
 				95ED97201AE8E77000C0D321 /* OwlistViewController.swift */,
 				9584453A1AEA622900F77186 /* ItemDetailViewController.swift */,
+				9584453D1AEB452E00F77186 /* AllListsViewController.swift */,
+				95C0B3B71AEBCBD5000F0AD9 /* ListDetailViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -93,6 +101,7 @@
 				95ED971E1AE8E77000C0D321 /* AppDelegate.swift */,
 				9584453C1AEA623300F77186 /* View Controllers */,
 				958445381AEA37C200F77186 /* OwlistItem.swift */,
+				9584453F1AEB49B500F77186 /* Owlist.swift */,
 				95ED97221AE8E77000C0D321 /* Main.storyboard */,
 				95ED97251AE8E77000C0D321 /* Images.xcassets */,
 				95ED97271AE8E77000C0D321 /* LaunchScreen.xib */,
@@ -228,8 +237,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				958445391AEA37C300F77186 /* OwlistItem.swift in Sources */,
+				95C0B3B81AEBCBD5000F0AD9 /* ListDetailViewController.swift in Sources */,
 				9584453B1AEA622900F77186 /* ItemDetailViewController.swift in Sources */,
 				95ED97211AE8E77000C0D321 /* OwlistViewController.swift in Sources */,
+				958445401AEB49B500F77186 /* Owlist.swift in Sources */,
+				9584453E1AEB452E00F77186 /* AllListsViewController.swift in Sources */,
 				95ED971F1AE8E77000C0D321 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

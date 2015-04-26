@@ -17,6 +17,7 @@ class OwlistViewController: UITableViewController, ItemDetailViewControllerDeleg
     // At this point, items does not have a value yet.
     
     var items: [OwlistItem]
+    var owlist: Owlist!
     
     //MARK: Initializer for Checklist Items
     required init(coder aDecoder: NSCoder) {
@@ -27,6 +28,8 @@ class OwlistViewController: UITableViewController, ItemDetailViewControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 44
+        title = owlist.name
         // Do any additional setup after loading the view, typically from a nib.
     }
 

@@ -17,7 +17,7 @@ class OwlistItem: NSObject, NSCoding {
         checked = !checked
     }
     
-    //MARK: NSCoder Methos
+    //MARK: NSCoder Methods
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(text, forKey: "Text")
         aCoder.encodeBool(checked, forKey: "Checked")
