@@ -8,11 +8,23 @@
 
 import UIKit
 
-class Owlist: NSObject {
+class Owlist: NSObject, NSCoding {
    var name = ""
+    var items = [OwlistItem]()
+    
     init(name: String) {
         self.name = name
         super.init()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObjectForKey("Name") as! String
+        items = aDecoder.decodeObjectForKey("Items") as! [OwlistItem]
+        super.init()
+    }
+    func encodeWithCoder(aCoder: NSCoder) {
+            aCoder.encodeObject(name, forKey: "Name")
+            aCoder.encodeObject(items, forKey: "Items")
     }
     
 }

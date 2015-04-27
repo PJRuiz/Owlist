@@ -10,24 +10,9 @@ import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
     //MARK: - Initializer with NSCoder
-     var lists: [Owlist]
+    var dataModel: DataModel!
     weak var delegate: ListDetailViewControllerDelegate?
     
-    required init(coder aDecoder: NSCoder) {
-        
-        lists = [Owlist]( )
-        
-        super.init(coder: aDecoder)
-        var list = Owlist(name: "Birthdays")
-        lists.append(list)
-        list = Owlist(name: "Groceries")
-        lists.append(list)
-        list = Owlist(name: "Cool Apps")
-        lists.append(list)
-        list = Owlist(name: "To Do")
-        lists.append(list)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -39,7 +24,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.count
+        return dataModel.lists.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -48,7 +33,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         if cell == nil {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
-        let owlist = lists[indexPath.row]
+        let owlist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = owlist.name
         cell.accessoryType = .DetailDisclosureButton
         
@@ -57,13 +42,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let owlist = lists[indexPath.row]
+        let owlist = dataModel.lists[indexPath.row]
         performSegueWithIdentifier("ShowOwlist", sender: owlist)
     }
     
     override func tableView(tableView: UITableView,
         commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            lists.removeAtIndex(indexPath.row)
+            dataModel.lists.removeAtIndex(indexPath.row)
             let indexPaths = [indexPath]
             tableView.deleteRowsAtIndexPaths(indexPaths,withRowAnimation: .Automatic)
     }
@@ -74,7 +59,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let controller = navigationController.topViewController as! ListDetailViewController
         controller.delegate = self
         
-        let owlist = lists[indexPath.row]
+        let owlist = dataModel.lists[indexPath.row]
         controller.owlistToEdit = owlist
         
         presentViewController(navigationController, animated: true, completion: nil)
@@ -100,8 +85,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     func listDetailViewController(controller: ListDetailViewController, didFinishAddingOwlist owlist: Owlist) {
-            let newRowIndex = lists.count
-            lists.append(owlist)
+            let newRowIndex = dataModel.lists.count
+            dataModel.lists.append(owlist)
             let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
             let indexPaths = [indexPath]
             tableView.insertRowsAtIndexPaths(indexPaths,withRowAnimation: .Automatic)
@@ -109,7 +94,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     func listDetailViewController(controller: ListDetailViewController, didFinishEditingOwlist owlist: Owlist) {
-        if let index = find(lists, owlist)
+        if let index = find(dataModel.lists, owlist)
         {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             if let cell = tableView.cellForRowAtIndexPath(indexPath)
@@ -119,6 +104,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
 
+    
      //MARK: - Final Class Closure
 }
