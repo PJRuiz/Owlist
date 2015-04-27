@@ -43,13 +43,14 @@ class DataModel {
                 let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
                 lists = unarchiver.decodeObjectForKey("Owlists") as! [Owlist]
                 unarchiver.finishDecoding()
+                sortOwlists()
             }
         }
     }
     
     //MARK: - Default Values for NSUserDefaults
     func registerDefaults() {
-            let dictionary = [ "OwlistIndex": -1, "FirstTime": true ]
+            let dictionary = [ "OwlistIndex": -1, "FirstTime": true, "OwlistItemID": 0 ]
             NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
     }
     
@@ -75,6 +76,23 @@ class DataModel {
                     indexOfSelectedOwlist = 0
                     userDefaults.setBool(false, forKey: "FirstTime")
                 }
+    }
+    
+    //MARK: - Sort Owlists
+    func sortOwlists() {
+                lists.sort({
+                owlist1, owlist2 in return
+                owlist1.name.localizedStandardCompare(owlist2.name) == NSComparisonResult.OrderedAscending
+                })
+    }
+    
+    //MARK: - Notifications
+    class func nextOwlistItemID() -> Int {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let itemID = userDefaults.integerForKey("OwlistItemID")
+        userDefaults.setInteger(itemID + 1, forKey: "OwlistItemID")
+        userDefaults.synchronize()
+        return itemID
     }
     
     //MARK: -FInal Closure

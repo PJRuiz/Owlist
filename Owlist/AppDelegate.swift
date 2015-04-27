@@ -25,7 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = window!.rootViewController as! UINavigationController
         let controller = navigationController.viewControllers[0] as! AllListsViewController
         controller.dataModel = dataModel
+        
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        println("didReceiveLocalNotification \(notification)")
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -56,13 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataModel.saveOwlists()
     }
     
-    func uicolorFromHex(rgbValue:UInt32)->UIColor{
-            let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-            let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-            let blue = CGFloat(rgbValue & 0xFF)/256.0
-            
-            return UIColor(red:red, green:green, blue:blue, alpha:1.0)
-    }
+
+    
 
 
 }

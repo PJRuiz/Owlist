@@ -48,7 +48,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             {
                 cell.detailTextLabel!.text = "\(count) Remaining"
             }
-        
+        cell.imageView!.image = UIImage(named: owlist.iconName)
         return cell
     
     }
@@ -99,24 +99,16 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     func listDetailViewController(controller: ListDetailViewController, didFinishAddingOwlist owlist: Owlist) {
-            let newRowIndex = dataModel.lists.count
             dataModel.lists.append(owlist)
-            let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
-            let indexPaths = [indexPath]
-            tableView.insertRowsAtIndexPaths(indexPaths,withRowAnimation: .Automatic)
+            dataModel.sortOwlists()
+            tableView.reloadData()
             dismissViewControllerAnimated(true, completion: nil)
-    }
+     }
     
     func listDetailViewController(controller: ListDetailViewController, didFinishEditingOwlist owlist: Owlist) {
-        if let index = find(dataModel.lists, owlist)
-        {
-            let indexPath = NSIndexPath(forRow: index, inSection: 0)
-            if let cell = tableView.cellForRowAtIndexPath(indexPath)
-                {
-                    cell.textLabel!.text = owlist.name
-                }
-        }
-        dismissViewControllerAnimated(true, completion: nil)
+                dataModel.sortOwlists()
+                tableView.reloadData()
+                dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: -Reset to Main Index if you exit an Owlist

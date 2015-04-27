@@ -16,10 +16,16 @@ protocol ListDetailViewControllerDelegate: class {
     func listDetailViewController(controller: ListDetailViewController, didFinishEditingOwlist owlist: Owlist)
 }
 
-class ListDetailViewController: UITableViewController, UITextFieldDelegate {
+class ListDetailViewController: UITableViewController, UITextFieldDelegate, IconPickerViewControllerDelegate {
+    
+    var iconName = "Folder"
+    
     //MARK: -IBOutlets
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var iconImageView: UITableViewCell!
+    
+    
      weak var delegate: ListDetailViewControllerDelegate?
     
     var owlistToEdit: Owlist?
@@ -32,7 +38,9 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
             title = "Edit Owlist"
             textField.text = owlist.name
             doneBarButton.enabled = true
+            iconName = owlist.iconName
         }
+        iconImageView.imageView!.image = UIImage(named: iconName)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,16 +57,22 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func done() {
                 if let owlist = owlistToEdit {
                     owlist.name = textField.text
+                    owlist.iconName = iconName
                     delegate?.listDetailViewController(self,didFinishEditingOwlist: owlist)
                 } else {
-                    let owlist = Owlist(name: textField.text)
+                    let owlist = Owlist(name: textField.text, iconName: iconName)
+                    owlist.iconName = iconName
                     delegate?.listDetailViewController(self, didFinishAddingOwlist: owlist)
                 }
     }
     
     // make sure the user cannot select the table cell with the text field
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return nil
+        if indexPath.section == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
     }
     
     // text field delegate method that enables or disables the Done button depending on whether the text field is empty or not
@@ -67,6 +81,19 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
                         let newText: NSString = oldText.stringByReplacingCharactersInRange( range, withString: string)
                         doneBarButton.enabled = (newText.length > 0)
                         return true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+                            if segue.identifier == "PickIcon" {
+                                let controller = segue.destinationViewController as! IconPickerViewController
+                                controller.delegate = self
+                            }
+    }
+    
+    func iconPicker(picker: IconPickerViewController, didPickIcon iconName: String) {
+                                self.iconName = iconName
+                                iconImageView.imageView!.image = UIImage(named: iconName)
+                                navigationController?.popViewControllerAnimated(true)
     }
     //MARK: Final Closure
 }

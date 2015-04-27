@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		956AF87B1AEDD53C00FDC5A2 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956AF87A1AEDD53C00FDC5A2 /* DataModel.swift */; };
 		956AF87F1AEDEBFE00FDC5A2 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956AF87E1AEDEBFE00FDC5A2 /* UIColor+Extensions.swift */; };
+		956AF8811AEDF7AC00FDC5A2 /* IconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956AF8801AEDF7AC00FDC5A2 /* IconPickerViewController.swift */; };
 		958445391AEA37C300F77186 /* OwlistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958445381AEA37C200F77186 /* OwlistItem.swift */; };
 		9584453B1AEA622900F77186 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584453A1AEA622900F77186 /* ItemDetailViewController.swift */; };
 		9584453E1AEB452E00F77186 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9584453D1AEB452E00F77186 /* AllListsViewController.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		956AF87A1AEDD53C00FDC5A2 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		956AF87E1AEDEBFE00FDC5A2 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		956AF8801AEDF7AC00FDC5A2 /* IconPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconPickerViewController.swift; sourceTree = "<group>"; };
 		958445381AEA37C200F77186 /* OwlistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwlistItem.swift; sourceTree = "<group>"; };
 		9584453A1AEA622900F77186 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
 		9584453D1AEB452E00F77186 /* AllListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		956AF8821AEDF7C500FDC5A2 /* Owlist Objects */ = {
+			isa = PBXGroup;
+			children = (
+				9584453F1AEB49B500F77186 /* Owlist.swift */,
+				958445381AEA37C200F77186 /* OwlistItem.swift */,
+			);
+			name = "Owlist Objects";
+			sourceTree = "<group>";
+		};
 		9584453C1AEA623300F77186 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +88,7 @@
 				9584453A1AEA622900F77186 /* ItemDetailViewController.swift */,
 				9584453D1AEB452E00F77186 /* AllListsViewController.swift */,
 				95C0B3B71AEBCBD5000F0AD9 /* ListDetailViewController.swift */,
+				956AF8801AEDF7AC00FDC5A2 /* IconPickerViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -104,11 +116,10 @@
 			children = (
 				95ED971E1AE8E77000C0D321 /* AppDelegate.swift */,
 				956AF87A1AEDD53C00FDC5A2 /* DataModel.swift */,
+				956AF8821AEDF7C500FDC5A2 /* Owlist Objects */,
 				9584453C1AEA623300F77186 /* View Controllers */,
-				958445381AEA37C200F77186 /* OwlistItem.swift */,
-				9584453F1AEB49B500F77186 /* Owlist.swift */,
-				956AF87E1AEDEBFE00FDC5A2 /* UIColor+Extensions.swift */,
 				95ED97221AE8E77000C0D321 /* Main.storyboard */,
+				956AF87E1AEDEBFE00FDC5A2 /* UIColor+Extensions.swift */,
 				95ED97251AE8E77000C0D321 /* Images.xcassets */,
 				95ED97271AE8E77000C0D321 /* LaunchScreen.xib */,
 				95ED971C1AE8E77000C0D321 /* Supporting Files */,
@@ -245,6 +256,7 @@
 				958445391AEA37C300F77186 /* OwlistItem.swift in Sources */,
 				95C0B3B81AEBCBD5000F0AD9 /* ListDetailViewController.swift in Sources */,
 				9584453B1AEA622900F77186 /* ItemDetailViewController.swift in Sources */,
+				956AF8811AEDF7AC00FDC5A2 /* IconPickerViewController.swift in Sources */,
 				95ED97211AE8E77000C0D321 /* OwlistViewController.swift in Sources */,
 				958445401AEB49B500F77186 /* Owlist.swift in Sources */,
 				956AF87B1AEDD53C00FDC5A2 /* DataModel.swift in Sources */,
