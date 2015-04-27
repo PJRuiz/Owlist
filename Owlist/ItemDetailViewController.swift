@@ -58,8 +58,21 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK: Table View Selection Methods
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return nil
+        if indexPath.section == 1 && indexPath.row == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
     }
+    
+    override func tableView(tableView: UITableView,var indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+                if indexPath.section == 1 && indexPath.row == 2
+                {
+                    indexPath = NSIndexPath(forRow: 0, inSection: indexPath.section)
+                }
+                return super.tableView(tableView,indentationLevelForRowAtIndexPath: indexPath)
+    }
+    
     
     //MARK: View Controller Properties
     override func viewDidLoad() {
@@ -100,8 +113,52 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     func showDatePicker() {
         datePickerVisible = true
+        
+        let indexPathDateRow = NSIndexPath(forRow: 1, inSection: 1)
         let indexPathDatePicker = NSIndexPath(forRow: 2, inSection: 1)
+        
+        if let dateCell = tableView.cellForRowAtIndexPath(indexPathDateRow) {
+            dateCell.detailTextLabel!.textColor = dateCell.detailTextLabel!.tintColor
+        }
+        
+        tableView.beginUpdates()
+        
         tableView.insertRowsAtIndexPaths([indexPathDatePicker], withRowAnimation: .Fade)
+        tableView.reloadRowsAtIndexPaths([indexPathDateRow], withRowAnimation: .None)
+        
+        tableView.endUpdates()
+        
+        
+        if let pickerCell = tableView.cellForRowAtIndexPath( indexPathDatePicker)
+        {
+            let datePicker = pickerCell.viewWithTag(100) as! UIDatePicker
+            datePicker.setDate(dueDate, animated: false)
+        }
+    }
+    
+    func hideDatePicker() {
+        if datePickerVisible
+        {
+            datePickerVisible = false
+            let indexPathDateRow = NSIndexPath(forRow: 1, inSection: 1)
+            let indexPathDatePicker = NSIndexPath(forRow: 2, inSection: 1)
+            if let cell = tableView.cellForRowAtIndexPath(indexPathDateRow)
+            {
+                cell.detailTextLabel!.textColor = UIColor(white: 0, alpha: 0.5)
+            }
+            
+            tableView.beginUpdates()
+            
+            tableView.reloadRowsAtIndexPaths([indexPathDateRow],withRowAnimation: .None)
+            tableView.deleteRowsAtIndexPaths([indexPathDatePicker],withRowAnimation: .Fade)
+            
+            tableView.endUpdates()
+        }
+    }
+    
+    func dateChanged(datePicker: UIDatePicker) {
+        dueDate = datePicker.date
+        updateDueDateLabel()
     }
     
     override func tableView(tableView: UITableView,
@@ -151,8 +208,17 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
                             tableView.deselectRowAtIndexPath(indexPath, animated: true)
                             textField.resignFirstResponder()
                             if indexPath.section == 1 && indexPath.row == 1 {
-                                showDatePicker()
+                                if !datePickerVisible
+                                {
+                                    showDatePicker()
+                                } else {
+                                    hideDatePicker()
+                                }
                             }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        hideDatePicker()
     }
     //MARK: - Final Closure
 }
