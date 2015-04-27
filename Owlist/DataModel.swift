@@ -10,9 +10,12 @@ import Foundation
 
 class DataModel {
     var lists = [Owlist]()
+    
+    //MARK: -Initializers
     init( ) {
         loadOwlists( )
         registerDefaults( )
+        handleFirstTime()
     }
     
     //MARK: -Load & Save
@@ -60,6 +63,18 @@ class DataModel {
         {
             NSUserDefaults.standardUserDefaults().setInteger(newValue,forKey: "OwlistIndex")
         }
+    }
+    
+    //MARK: -First Time Launching App
+    func handleFirstTime() {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                let firstTime = userDefaults.boolForKey("FirstTime")
+                if firstTime {
+                    let owlist = Owlist(name: "List")
+                    lists.append(owlist)
+                    indexOfSelectedOwlist = 0
+                    userDefaults.setBool(false, forKey: "FirstTime")
+                }
     }
     
     //MARK: -FInal Closure
