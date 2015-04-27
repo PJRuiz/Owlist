@@ -10,8 +10,9 @@ import Foundation
 
 class DataModel {
     var lists = [Owlist]()
-    init() {
-        loadOwlists()
+    init( ) {
+        loadOwlists( )
+        registerDefaults( )
     }
     
     //MARK: -Load & Save
@@ -35,11 +36,31 @@ class DataModel {
     func loadOwlists() {
         let path = dataFilePath()
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
-        if let data = NSData(contentsOfFile: path) {
-        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        lists = unarchiver.decodeObjectForKey("Owlists") as! [Owlist]
-        unarchiver.finishDecoding()
-        } }
+            if let data = NSData(contentsOfFile: path) {
+                let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+                lists = unarchiver.decodeObjectForKey("Owlists") as! [Owlist]
+                unarchiver.finishDecoding()
+            }
+        }
     }
     
+    //MARK: - Default Values for NSUserDefaults
+    func registerDefaults() {
+            let dictionary = [ "OwlistIndex": -1, "FirstTime": true ]
+            NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
+    }
+    
+    var indexOfSelectedOwlist: Int {
+        get
+        {
+            return NSUserDefaults.standardUserDefaults().integerForKey( "OwlistIndex")
+        }
+        
+        set
+        {
+            NSUserDefaults.standardUserDefaults().setInteger(newValue,forKey: "OwlistIndex")
+        }
+    }
+    
+    //MARK: -FInal Closure
 }

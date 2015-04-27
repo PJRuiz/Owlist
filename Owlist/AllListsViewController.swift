@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
     //MARK: - Initializer with NSCoder
     var dataModel: DataModel!
     weak var delegate: ListDetailViewControllerDelegate?
@@ -42,6 +42,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        dataModel.indexOfSelectedOwlist = indexPath.row
         let owlist = dataModel.lists[indexPath.row]
         performSegueWithIdentifier("ShowOwlist", sender: owlist)
     }
@@ -105,7 +106,25 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-
+    //MARK: -Reset to Main Index if you exit an Owlist
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController,
+        animated: Bool) {
+        if viewController === self
+        {
+            dataModel.indexOfSelectedOwlist = -1
+        }
+    }
+    
+    //MARK: -View Appears
+    override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated)
+            navigationController?.delegate = self
+            let index = dataModel.indexOfSelectedOwlist
+            if index >= 0 && index < dataModel.lists.count
+            {
+                    let owlist = dataModel.lists[index]
+                    performSegueWithIdentifier("ShowOwlist", sender: owlist)
+            }
+    }
     
      //MARK: - Final Class Closure
 }
