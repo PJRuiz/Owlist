@@ -31,11 +31,23 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let cellIdentifier = "Cell"
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
         }
         let owlist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = owlist.name
         cell.accessoryType = .DetailDisclosureButton
+        
+        let count = owlist.countUncheckedItems()
+        if owlist.items.count == 0
+            {
+                cell.detailTextLabel!.text = "(No Items)"
+            } else if count == 0
+            {
+                cell.detailTextLabel!.text = "All Done!"
+            } else
+            {
+                cell.detailTextLabel!.text = "\(count) Remaining"
+            }
         
         return cell
     
@@ -81,6 +93,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
     }
     
+    //MARK: - List Detail View Controller Methods
     func listDetailViewControllerDidCancel(controller: ListDetailViewController) {
                     dismissViewControllerAnimated(true, completion: nil)
     }
@@ -115,7 +128,12 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
     }
     
-    //MARK: -View Appears
+    //MARK: -View Appear Methods
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(animated: Bool) { super.viewDidAppear(animated)
             navigationController?.delegate = self
             let index = dataModel.indexOfSelectedOwlist

@@ -22,9 +22,14 @@ class Owlist: NSObject, NSCoding {
         items = aDecoder.decodeObjectForKey("Items") as! [OwlistItem]
         super.init()
     }
+    
     func encodeWithCoder(aCoder: NSCoder) {
             aCoder.encodeObject(name, forKey: "Name")
             aCoder.encodeObject(items, forKey: "Items")
+    }
+    
+    func countUncheckedItems() -> Int {
+        return reduce(items, 0) { cnt, item in cnt + (item.checked ? 0 : 1) }
     }
     
 }
