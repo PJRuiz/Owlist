@@ -16,15 +16,14 @@ class IconPickerViewController: UITableViewController {
         weak var delegate: IconPickerViewControllerDelegate?
         
         let icons = [
-                            "No Icon",
+                            "No Icon", "Reading",
                             "Appointments",
                             "Birthdays",
                             "Chores",
-                            "Folder",
+                            "Work",
                             "Groceries",
-                            "Inbox",
-                            "Photos",
-                            "Trips"
+                            "Trips",
+                            "Pets", "Programming"
                         ]
         
         override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -18,7 +18,7 @@ protocol ListDetailViewControllerDelegate: class {
 
 class ListDetailViewController: UITableViewController, UITextFieldDelegate, IconPickerViewControllerDelegate {
     
-    var iconName = "Folder"
+    var iconName = "Groceries"
     
     //MARK: -IBOutlets
     @IBOutlet weak var textField: UITextField!

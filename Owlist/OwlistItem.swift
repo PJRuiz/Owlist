@@ -44,46 +44,48 @@ class OwlistItem: NSObject, NSCoding {
         super.init()
     }
     
+    //MARK: - Notification Methods
+    
     func scheduleNotification() {
         let existingNotification = notificationForThisItem()
         if let notification = existingNotification {
-            println("Found an existing notification \(notification)")
+            //    println("Found an existing notification \(notification)")
             UIApplication.sharedApplication().cancelLocalNotification(notification)
         }
-        if shouldRemind && dueDate.compare(NSDate()) != NSComparisonResult.OrderedAscending
-        {
+        
+        if shouldRemind && dueDate.compare(NSDate()) != NSComparisonResult.OrderedAscending {
             let localNotification = UILocalNotification()
             localNotification.fireDate = dueDate
-            localNotification.timeZone = NSTimeZone.defaultTimeZone()
+            localNotification.timeZone = NSTimeZone.localTimeZone()
             localNotification.alertBody = text
             localNotification.soundName = UILocalNotificationDefaultSoundName
             localNotification.userInfo = ["ItemID": itemID]
             
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            
+            //  println("Scheduled notification \(localNotification) for itemID \(itemID)")
         }
     }
     
     func notificationForThisItem() -> UILocalNotification? {
-                let allNotifications = UIApplication.sharedApplication().scheduledLocalNotifications as! [UILocalNotification]
-                for notification in allNotifications
-                {
-                    if let number = notification.userInfo?["ItemID"] as? NSNumber
-                    {
-                        if number.integerValue == itemID
-                        {
-                            return notification
-                        }
-                    }
+        let allNotifications = UIApplication.sharedApplication().scheduledLocalNotifications as! [UILocalNotification]
+        for notification in allNotifications {
+            if let number = notification.userInfo?["ItemID"] as? NSNumber {
+                if number.integerValue == itemID {
+                    return notification
                 }
-                return nil
+            }
+        }
+        return nil
     }
     
     deinit {
-                    let existingNotification = notificationForThisItem()
-                    if let notification = existingNotification
-                    {
-                        UIApplication.sharedApplication().cancelLocalNotification(notification)
-                    }
+        let existingNotification = notificationForThisItem()
+        if let notification = existingNotification {
+            // println("Removing existing notification \(notification)")
+            UIApplication.sharedApplication().cancelLocalNotification(notification)
+        }
     }
-    
 }
+
+  

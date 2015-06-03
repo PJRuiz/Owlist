@@ -31,6 +31,8 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     var itemToEdit: OwlistItem?
     weak var delegate: ItemDetailViewControllerDelegate?
+    
+    //MARK: - Date Variables
     var dueDate = NSDate()
     var datePickerVisible = false
     
@@ -172,30 +174,25 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         updateDueDateLabel()
     }
     
-    override func tableView(tableView: UITableView,
-            cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            // 1
-            if indexPath.section == 1 && indexPath.row == 2
-            {
-                // 2
+    override func tableView(tableView: UITableView,cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+                if indexPath.section == 1 && indexPath.row == 2 {
+                
                 var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("DatePickerCell") as? UITableViewCell
-                    if cell == nil
-                    {
-                        cell = UITableViewCell(style: .Default,
-                        reuseIdentifier: "DatePickerCell")
-                        cell.selectionStyle = .None
-                        // 3
-                        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0,width: 320, height: 216))
-                        datePicker.tag = 100
-                        cell.contentView.addSubview(datePicker)
-                        // 4
-                        datePicker.addTarget(self, action: Selector("dateChanged:"), forControlEvents: .ValueChanged)
-                    }
-                    return cell
-                    // 5
+                if cell == nil {
+        cell = UITableViewCell(style: .Default, reuseIdentifier: "DatePickerCell")
+        cell.selectionStyle = .None
+        
+        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 320, height: 216))
+        datePicker.tag = 100
+        cell.contentView.addSubview(datePicker)
+        
+        datePicker.addTarget(self, action: Selector("dateChanged:"), forControlEvents: .ValueChanged)
+                }
+                return cell
+                
             } else {
                 return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
-            }
+                }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

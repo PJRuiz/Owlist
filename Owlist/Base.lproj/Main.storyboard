@@ -225,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="rUR-D8-nfz">
+                            <tableViewSection headerTitle="Name of the List" id="rUR-D8-nfz">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Kxl-Nz-U69">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -251,7 +251,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="rdR-jY-ocy">
+                            <tableViewSection headerTitle="Choose An Icon" id="rdR-jY-ocy">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7Kk-2W-efJ">
                                         <autoresizingMask key="autoresizingMask"/>

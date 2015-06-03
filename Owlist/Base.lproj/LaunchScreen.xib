@@ -9,9 +9,46 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iTunesArtwork" translatesAutoresizingMaskIntoConstraints="NO" id="us1-wA-vWf">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.85490196078431369" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="us1-wA-vWf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0M2-Vz-o4g"/>
+                <constraint firstItem="us1-wA-vWf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EEP-n9-Iic"/>
+                <constraint firstAttribute="bottom" secondItem="us1-wA-vWf" secondAttribute="bottom" id="Ozx-SZ-Jnr"/>
+                <constraint firstAttribute="trailing" secondItem="us1-wA-vWf" secondAttribute="trailing" id="xRD-mz-x45"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="us1-wA-vWf"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="0M2-Vz-o4g"/>
+                    <exclude reference="EEP-n9-Iic"/>
+                    <exclude reference="Ozx-SZ-Jnr"/>
+                    <exclude reference="xRD-mz-x45"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="us1-wA-vWf"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="0M2-Vz-o4g"/>
+                    <include reference="EEP-n9-Iic"/>
+                    <include reference="Ozx-SZ-Jnr"/>
+                    <include reference="xRD-mz-x45"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="564" y="471"/>
         </view>
     </objects>
+    <resources>
+        <image name="iTunesArtwork" width="512" height="512"/>
+    </resources>
 </document>
